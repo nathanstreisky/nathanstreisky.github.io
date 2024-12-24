@@ -1,4 +1,3 @@
 layout: post
-title: "Since-the world-is-a-fucked-up-place"
 
 if you can choose to be something, choose to be kind.
