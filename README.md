@@ -1,4 +1,7 @@
-# Meu Currículo
+<div class="header">
+  <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/6377392-mapa-mundi-em-fundo-preto-mapa-mundi-modelo-com-continentes-norte-e-america-do-sul-europa-e-asia-africa-e-australia-vetor.jpg" alt="logo" height="600" width="1100"/>
+  <h1>My website name</h1>
+</div>
 
 <div style="display: flex; flex-wrap: nowrap; justify-content: space-between;">
 
