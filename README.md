@@ -1,10 +1,35 @@
-# Meu Portfólio
+# Meu Currículo
 
-Aqui está uma introdução em **Markdown**.
+<div style="display: flex; flex-wrap: nowrap; justify-content: space-between;">
 
-<div style="background-color: #f0f0f0; padding: 10px;">
-    <h2>Seção Personalizada em HTML</h2>
-    <p>Este é um bloco feito em HTML para adicionar mais estilo ou funcionalidade.</p>
+  <!-- Lado esquerdo -->
+  <div style="width: 45%; background-color: #f7f7f7; padding: 15px; border-right: 1px solid #ccc;">
+    <h2>Informações Pessoais</h2>
+    <p>Nome: João da Silva</p>
+    <p>Email: joao.silva@example.com</p>
+    <p>Telefone: (11) 99999-9999</p>
+
+    <h2>Habilidades</h2>
+    <ul>
+      <li>Programação</li>
+      <li>Design Gráfico</li>
+      <li>Gestão de Projetos</li>
+    </ul>
+  </div>
+
+  <!-- Lado direito -->
+  <div style="width: 45%; padding: 15px;">
+    <h2>Experiência Profissional</h2>
+    <p><strong>Empresa X</strong> - Desenvolvedor Web</p>
+    <p><em>Jan 2020 - Presente</em></p>
+    <ul>
+      <li>Desenvolvimento de sistemas web usando JavaScript.</li>
+      <li>Otimização de processos internos com automação.</li>
+    </ul>
+
+    <h2>Educação</h2>
+    <p><strong>Universidade Y</strong> - Bacharelado em Ciência da Computação</p>
+    <p><em>2015 - 2019</em></p>
+  </div>
+
 </div>
-
-**Texto Markdown continua aqui.**
