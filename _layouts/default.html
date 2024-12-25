@@ -41,7 +41,20 @@
       </header>
       <section>
 
+      <!--{{ content }}-->
       {{ content }}
+        <section>
+          <h2>Últimos Posts</h2>
+          <ul>
+            {% for post in site.posts %}
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              <small>{{ post.date | date: "%d de %B de %Y" }}</small>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+
 
       </section>
       <footer>
