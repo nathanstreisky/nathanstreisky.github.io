@@ -28,13 +28,19 @@
       font-weight: bold;
       cursor: pointer;
     }
+    .profile-photo {
+  width: 5px;
+  height: 5px;
+  object-fit: cover; /* Ajusta o conteúdo da imagem dentro das dimensões */
+  border-radius: 50%; /* Faz a imagem ficar circular */
+    }
   </style>
 </head>
 <body>
   <!-- Sidebar com perfil -->
   <div id="sidebar">
     <h2>Perfil</h2>
-    <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" class="profile-photo">
+    <!--<img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" class="profile-photo">-->
     <p>Meu nome é Nathan, gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>.</p>
     <p>Meus interesses incluem sensoriamento remoto, programação, hidrologia e mecânica dos fluidos.</p>
   </div>
@@ -85,18 +91,6 @@ links.forEach(link => {
       });
   });
 });
-
-// Função para mostrar a lista de posts novamente
-function showPostList() {
-  contentDiv.innerHTML = `
-    <h2>Posts</h2>
-    <ul>
-      {% for post in site.posts %}
-      <li><a href="{{ post.url | relative_url }}" class="post-link" data-post-url="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-      {% endfor %}
-    </ul>
-  `;
-}
   </script>
 </body>
 </html>
