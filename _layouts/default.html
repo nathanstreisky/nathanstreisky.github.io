@@ -1,50 +1,79 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {% seo %}
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <![endif]-->
-    {% include head-custom.html %}
-  </head>
-  <body>
-    <div style="display: flex; height: 100vh;">
-
-<!-- Lado Esquerdo -->
-<div style="flex: 0.3; background-color: #f7f7f7; padding: 20px; border-right: 1px solid #ccc; overflow-y: auto;">
-  <div style="text-align: center;">
-    <!-- Foto do Perfil -->
-    <img src="assets/images/profile.jpg" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px;">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog com Perfil Fixo</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    #sidebar {
+      width: 30%;
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-right: 1px solid #ccc;
+    }
+    #content {
+      width: 70%;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .post-link {
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar com perfil -->
+  <div id="sidebar">
+    <h2>Perfil</h2>
+    <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" style="width: 100%; border-radius: 10px;">
+    <p>Meu nome é Nathan, gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>.</p>
+    <p>Meus interesses incluem sensoriamento remoto, programação, hidrologia e mecânica dos fluidos.</p>
   </div>
-  <!--<h2 style="text-align: center;">Perfil</h2>-->
-  <p style="text-align:justify; font-size: 16px">Meu nome é Nathan, nascido e criado no Brasil e atualmente gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>. Meus interesses oscilam entre sensoriamento remoto, programação hidrologia e, recentemente, me aventurando por mecânica dos fluidos.</p>
-  <hr style="margin: 20px 0;">
-  <!--<h2 style="text-align: center;">Profile</h2>-->
-  <p style="text-align:justify; font-size: 16px">My name is Nathan, born and raised in Brazil, and currently an environmental engineering manager at <a href="https://carbonspace.tech/">CarbonSpace</a>. My interests range from remote sensing, programming, hydrology, and more recently, venturing into fluid mechanics.</p>
-</div>
 
-
-      <!-- Lado Direito -->
-      <div style="flex: 0.7; padding: 20px; overflow-y: auto;">
-        <!--<h2>Últimos Posts</h2>-->
-        <ul>
-          {% for post in site.posts %}
-          <li style="margin-bottom: 15px;">
-            <!--<a href="{{ post.url | relative_url }}" style="text-decoration: none; color: #000080; font-weight: bold;">{{ post.title }}</a>-->
-            <a href="{{ post.url | prepend: site.baseurl | relative_url }}" style="text-decoration: none; color: #007BFF; font-weight: bold;">{{ post.title }}</a>
-            <br>
-            <small style="color: #666;">{{ post.date | date: "%d de %B de %Y" }}</small>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-
+  <!-- Conteúdo dinâmico -->
+  <div id="content">
+    <!-- Conteúdo inicial (lista de posts) -->
+    <div id="posts">
+      <h2>Posts</h2>
+      <ul>
+        {% for post in site.posts %}
+        <li><a href="{{ post.url | relative_url }}" class="post-link" data-post-url="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
     </div>
-    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
-  </body>
+  </div>
+
+  <script>
+    // JavaScript para carregar o post dinamicamente
+    const links = document.querySelectorAll('.post-link');
+    const contentDiv = document.getElementById('content');
+
+    links.forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        const postUrl = link.getAttribute('data-post-url');
+        
+        // Fetch o conteúdo do post e atualiza o contentDiv
+        fetch(postUrl)
+          .then(response => response.text())
+          .then(html => {
+            contentDiv.innerHTML = html;
+          })
+          .catch(error => {
+            console.error('Erro ao carregar o post:', error);
+            contentDiv.innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
+          });
+      });
+    });
+  </script>
+</body>
 </html>
