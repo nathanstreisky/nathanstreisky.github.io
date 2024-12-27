@@ -22,13 +22,6 @@
       padding: 20px;
       overflow-y: auto;
     }
-    }
-    #profile-photo {
-      width: 5px;
-      height: 5px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
 
   </style>
 </head>
@@ -36,7 +29,7 @@
   <!-- Sidebar com perfil -->
   <div id="sidebar">
     <h2>Perfil</h2>
-    <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" class="profile-photo">
+    <img src="/assets/images/profile.jpg" title="profile">
     <p>Meu nome é Nathan, gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>.</p>
     <p>Meus interesses incluem sensoriamento remoto, programação, hidrologia e mecânica dos fluidos.</p>
   </div>
