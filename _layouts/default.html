@@ -35,7 +35,8 @@
         <ul>
           {% for post in site.posts %}
           <li style="margin-bottom: 15px;">
-            <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: #000080; font-weight: bold;">{{ post.title }}</a>
+            <!--<a href="{{ post.url | relative_url }}" style="text-decoration: none; color: #000080; font-weight: bold;">{{ post.title }}</a>-->
+            <a href="{{ post.url | prepend: site.baseurl | relative_url }}" style="text-decoration: none; color: #007BFF; font-weight: bold;">{{ post.title }}</a>
             <br>
             <small style="color: #666;">{{ post.date | date: "%d de %B de %Y" }}</small>
           </li>
