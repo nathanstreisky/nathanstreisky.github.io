@@ -34,7 +34,7 @@
   <!-- Sidebar com perfil -->
   <div id="sidebar">
     <h2>Perfil</h2>
-    <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" style="width: 100%; border-radius: 10px;">
+    <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" class="profile-photo">
     <p>Meu nome é Nathan, gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>.</p>
     <p>Meus interesses incluem sensoriamento remoto, programação, hidrologia e mecânica dos fluidos.</p>
   </div>
@@ -54,26 +54,49 @@
 
   <script>
     // JavaScript para carregar o post dinamicamente
-    const links = document.querySelectorAll('.post-link');
-    const contentDiv = document.getElementById('content');
+const links = document.querySelectorAll('.post-link');
+const contentDiv = document.getElementById('content');
 
-    links.forEach(link => {
-      link.addEventListener('click', event => {
-        event.preventDefault();
-        const postUrl = link.getAttribute('data-post-url');
+links.forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    const postUrl = link.getAttribute('data-post-url');
+    
+    // Fetch o conteúdo do post e atualiza o contentDiv
+    fetch(postUrl)
+      .then(response => response.text())
+      .then(html => {
+        // Adiciona o botão de voltar e o conteúdo do post
+        contentDiv.innerHTML = `
+          <button id="back-to-posts" style="margin-bottom: 10px; padding: 10px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Voltar para a lista de posts
+          </button>
+          ${html}
+        `;
         
-        // Fetch o conteúdo do post e atualiza o contentDiv
-        fetch(postUrl)
-          .then(response => response.text())
-          .then(html => {
-            contentDiv.innerHTML = html;
-          })
-          .catch(error => {
-            console.error('Erro ao carregar o post:', error);
-            contentDiv.innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
-          });
+        // Adiciona o evento de clique ao botão de voltar
+        document.getElementById('back-to-posts').addEventListener('click', () => {
+          showPostList();
+        });
+      })
+      .catch(error => {
+        console.error('Erro ao carregar o post:', error);
+        contentDiv.innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
       });
-    });
+  });
+});
+
+// Função para mostrar a lista de posts novamente
+function showPostList() {
+  contentDiv.innerHTML = `
+    <h2>Posts</h2>
+    <ul>
+      {% for post in site.posts %}
+      <li><a href="{{ post.url | relative_url }}" class="post-link" data-post-url="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  `;
+}
   </script>
 </body>
 </html>
