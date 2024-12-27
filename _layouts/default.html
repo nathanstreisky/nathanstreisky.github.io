@@ -22,12 +22,6 @@
       padding: 20px;
       overflow-y: auto;
     }
-    .post-link {
-      text-decoration: none;
-      color: #007BFF;
-      font-weight: bold;
-      cursor: pointer;
-    }
     .profile-photo {
   width: 5px;
   height: 5px;
@@ -40,7 +34,9 @@
   <!-- Sidebar com perfil -->
   <div id="sidebar">
     <h2>Perfil</h2>
-    <!--<img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" class="profile-photo">-->
+    <a href="https://64.media.tumblr.com/d6ed284e85356f9b11a5bf7adfe001a6/6ab334c2c3312279-76/s1280x1920/629e73468c2a2a37afaed8e23c53d99c46d3e15c.jpg" target="_blank">
+        <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Foto de Perfil" class="profile-photo">
+      </a>
     <p>Meu nome é Nathan, gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>.</p>
     <p>Meus interesses incluem sensoriamento remoto, programação, hidrologia e mecânica dos fluidos.</p>
   </div>
@@ -59,38 +55,61 @@
   </div>
 
   <script>
-    // JavaScript para carregar o post dinamicamente
-const links = document.querySelectorAll('.post-link');
+ const links = document.querySelectorAll('.post-link');
 const contentDiv = document.getElementById('content');
 
-links.forEach(link => {
-  link.addEventListener('click', event => {
-    event.preventDefault();
-    const postUrl = link.getAttribute('data-post-url');
-    
-    // Fetch o conteúdo do post e atualiza o contentDiv
-    fetch(postUrl)
-      .then(response => response.text())
-      .then(html => {
-        // Adiciona o botão de voltar e o conteúdo do post
-        contentDiv.innerHTML = `
-          <button id="back-to-posts" style="margin-bottom: 10px; padding: 10px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
-            Voltar para a lista de posts
-          </button>
-          ${html}
-        `;
-        
-        // Adiciona o evento de clique ao botão de voltar
-        document.getElementById('back-to-posts').addEventListener('click', () => {
-          showPostList();
+// Armazena o HTML inicial da lista de posts para restaurá-lo depois
+const postListHTML = `
+  <h2>Posts</h2>
+  <ul>
+    {% for post in site.posts %}
+    <li><a href="{{ post.url | relative_url }}" class="post-link" data-post-url="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+`;
+
+// Exibe a lista de posts ao carregar a página
+contentDiv.innerHTML = postListHTML;
+
+// Adiciona eventos aos links da lista de posts
+function setupPostLinks() {
+  const postLinks = document.querySelectorAll('.post-link');
+  postLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      const postUrl = link.getAttribute('data-post-url');
+
+      // Carrega o post selecionado
+      fetch(postUrl)
+        .then(response => response.text())
+        .then(html => {
+          // Substitui o conteúdo pelo post e adiciona o botão de voltar
+          contentDiv.innerHTML = `
+            <button id="back-to-posts" style="margin-bottom: 10px; padding: 10px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+              Voltar para a lista de posts
+            </button>
+            ${html}
+          `;
+
+          // Adiciona o evento ao botão de voltar
+          document.getElementById('back-to-posts').addEventListener('click', showPostList);
+        })
+        .catch(error => {
+          console.error('Erro ao carregar o post:', error);
+          contentDiv.innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
         });
-      })
-      .catch(error => {
-        console.error('Erro ao carregar o post:', error);
-        contentDiv.innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
-      });
+    });
   });
-});
+}
+
+// Função para exibir a lista de posts novamente
+function showPostList() {
+  contentDiv.innerHTML = postListHTML;
+  setupPostLinks(); // Reassocia os eventos dos links da lista
+}
+
+// Configura os links de posts ao carregar a página
+setupPostLinks();
   </script>
 </body>
 </html>
