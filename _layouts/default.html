@@ -83,8 +83,8 @@ function setupPostLinks() {
         .then(html => {
           // Substitui o conteúdo pelo post e adiciona o botão de voltar
           contentDiv.innerHTML = `
-            <button id="back-to-posts" style="margin-bottom: 10px; padding: 10px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
-              Voltar para a lista de posts
+            <button id="back-to-posts" class="return-button">
+                <span class=</span> Return
             </button>
             ${html}
           `;
