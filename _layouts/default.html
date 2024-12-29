@@ -23,38 +23,37 @@
       overflow-y: auto;
     }
     img{
-      display: block  
-      margin: auto
-    
-    }
-
-  </style>
+        display: block;
+        margin:auto;
+    }    
+   
+    </style>
 </head>
+
 <body>
-  <!-- Sidebar com perfil -->
-  <div id="sidebar">
-    <h2>Perfil</h2>
-    
-    <img src="/assets/images/profile.jpg" title="profile" height="200" width="200">
-    <p>Meu nome é Nathan, gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>.</p>
-    <p>Meus interesses incluem sensoriamento remoto, programação, hidrologia e mecânica dos fluidos.</p>
-  </div>
-
-  <!-- Conteúdo dinâmico -->
-  <div id="content">
-    <!-- Conteúdo inicial (lista de posts) -->
-    <div id="posts">
-      <h2>Posts</h2>
-      <ul>
-        {% for post in site.posts %}
-        <li><a href="{{ post.url | relative_url }}" class="post-link" data-post-url="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-        {% endfor %}
-      </ul>
+    <!-- Sidebar com perfil -->
+    <div id="sidebar">
+        <img src="https://st2.depositphotos.com/21244960/45775/v/450/depositphotos_457759704-stock-illustration-pixel-character-game-hero-concept.jpg" title="profile" height="200" width="200">
+        <p>Meu nome é Nathan, atualmente gestor de engenharia ambiental na <a href="https://carbonspace.tech/">CarbonSpace</a>. Meus interesses incluem sensoriamento remoto, programação, hidrologia e mecânica dos fluidos.</p>
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 10px 0;">
+        <p>My name is Nathan, currentlt Environmental engineering manager at <a href="https://carbonspace.tech/">CarbonSpace</a>. My interests include remote sensing, programming, hydrology and fluid mechanics.</p>
     </div>
-  </div>
 
-  <script>
- const links = document.querySelectorAll('.post-link');
+    <!-- Conteúdo dinâmico -->
+    <div id="content">
+    <!-- Conteúdo inicial (lista de posts) -->
+        <div id="posts">
+            <h2>Posts</h2>
+            <ul>
+                {% for post in site.posts %}
+                    <li><a href="{{ post.url | relative_url }}" class="post-link" data-post-url="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+<script>
+const links = document.querySelectorAll('.post-link');
 const contentDiv = document.getElementById('content');
 
 // Armazena o HTML inicial da lista de posts para restaurá-lo depois
