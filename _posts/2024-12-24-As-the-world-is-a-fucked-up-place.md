@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "As the is a fucked-up place"
+title: "As the world is a fucked-up place"
 date: 2024-12-25
 ---
 
