@@ -5,3 +5,5 @@ date: 2024-12-29
 ---
 
 ![Cover](assets/images/linkin-park-from-zero.jpg)
+
+<img src="assets/images/profile.jpg" title="profile" height="200" width="200">
