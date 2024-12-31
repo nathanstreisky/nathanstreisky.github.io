@@ -37,10 +37,10 @@
             margin-bottom: 15px; /* Adiciona espaçamento entre os itens da lista */
             font-size: 18px;
         }
-        li::before {
-            /*content: "➡️"; /* Substitui o ponto por outro marcador, como uma seta */
-          content: ">"; /* Substitui o ponto por outro marcador, como uma seta */
-            margin-right: 10px; /* Espaço entre o marcador e o texto */
+        li::marker {
+    content: "■"; /* Substitui o marcador padrão por um pequeno quadrado */
+    color: black; /* Define a cor do quadrado */
+    font-size: 0.8em; /* Ajusta o tamanho do marcador, se necessário */
         }
    
     </style>
