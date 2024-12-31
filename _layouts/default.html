@@ -37,12 +37,18 @@
             margin-bottom: 15px; /* Adiciona espaçamento entre os itens da lista */
             font-size: 18px;
         }
-        li::marker {
-    content: "■"; /* Substitui o marcador padrão por um pequeno quadrado */
-    color: black; /* Define a cor do quadrado */
-    font-size: 0.8em; /* Ajusta o tamanho do marcador, se necessário */
-          margin-right: 1em;
-        }
+        li::before {
+    content: "■"; /* Pequeno quadrado como marcador */
+    color: black; /* Define a cor */
+    font-size: 0.8em; /* Ajusta o tamanho */
+    margin-right: 0.5em; /* Adiciona espaço entre o marcador e o texto */
+    position: absolute;
+    left: 0; /* Marca o início do texto */
+}
+
+li span {
+    padding-left: 1.5em; /* Adiciona espaço entre o texto e o quadrado */
+}
    
     </style>
 </head>
